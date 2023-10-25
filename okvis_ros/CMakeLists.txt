@@ -63,7 +63,8 @@ catkin_package(
 )
 
 # we really want to use Release here
-set(CMAKE_BUILD_TYPE Release)
+SET(ROS_BUILD_TYPE RelWithDebInfo)
+SET(CMAKE_BUILD_TYPE RelWithDebInfo)
 
 message(STATUS "Building with ${CMAKE_BUILD_TYPE}")
 

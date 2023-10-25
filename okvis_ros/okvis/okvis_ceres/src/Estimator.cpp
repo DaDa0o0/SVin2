@@ -524,7 +524,11 @@ bool Estimator::removeObservation(uint64_t landmarkId, uint64_t poseId, size_t c
     for (PointMap::iterator it = landmarksMap_.begin(); it != landmarksMap_.end(); ++it) {
       LOG(INFO) << it->first << ", no. obs = " << it->second.observations.size();
     }
-    LOG(INFO) << landmarksMap_.at(landmarkId).id;
+    // this line cause std map out of range
+    // LOG(INFO) << landmarksMap_.at(landmarkId).id;
+
+    // if landmark if unavailable, stop removing
+    return false;
   }
   OKVIS_ASSERT_TRUE_DBG(Exception, isLandmarkAdded(landmarkId), "landmark not added");
 

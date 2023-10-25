@@ -125,6 +125,10 @@ bool FrameSynchronizer::detectionCompletedForAllCameras(uint64_t multiFrameId) {
   int position;
   if (findFrameById(multiFrameId, position)) {
     if (frameBuffer_[position].second == numCameras_) {
+        if(!(frameBuffer_[position].first->timestamp() > lastCompletedFrameTimestamp_ &&
+           (lastCompletedFrameId_ == 0 || frameBuffer_[position].first->id() > lastCompletedFrameId_))){
+            return false;
+        }
       OKVIS_ASSERT_TRUE(Exception,
                         frameBuffer_[position].first->timestamp() > lastCompletedFrameTimestamp_ &&
                             (lastCompletedFrameId_ == 0 || frameBuffer_[position].first->id() > lastCompletedFrameId_),
