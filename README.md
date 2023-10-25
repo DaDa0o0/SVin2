@@ -25,10 +25,20 @@ docker build -t svin_run -f ./run_svin.Dockerfile --network host .
 ```bash
 docker run -it --name svin_test -v [your_catkin_worksapce]/src:/home/svin_ws/src --rm --net host svin_run
 ```
-* Run Dcoker Container
+* Visalization
 
 Rviz can run out of the docker for visualization.
 
 ```bash
 rviz -d [your_catkin_worksapce]/src/SVIn/okvis_ros/config/rviz_svin.rviz
+```
+
+* Rosbag
+
+datasets: https://afrl.cse.sc.edu/afrl/resources/datasets/
+
+If you follow "Datasets for Visual-Inertial-Based State Estimation Algorithms" link you will be directed to a google drive directory, under the 'Bus' and 'Cave' you will find ROS bagfile. 
+
+```bash
+rosbag play [path_to_your_bag]/cave_loop_w_cam_info.bag --clock -r 0.8
 ```
