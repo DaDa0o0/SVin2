@@ -16,7 +16,7 @@ git clone https://github.com/DaDa0o0/SVin2.git
 * Build Docker Image
 
 ```bash
-cd [your_catkin_worksapce]/src/SVIn/docker
+cd [your_catkin_worksapce]/src/SVin2/docker
 docker build -t svin_run -f ./run_svin.Dockerfile --network host .
 ``` 
 
@@ -30,7 +30,7 @@ docker run -it --name svin_test -v [your_catkin_worksapce]/src:/home/svin_ws/src
 Rviz can run out of the docker for visualization.
 
 ```bash
-rviz -d [your_catkin_worksapce]/src/SVIn/okvis_ros/config/rviz_svin.rviz
+rviz -d [your_catkin_worksapce]/src/SVin2/okvis_ros/config/rviz_svin.rviz
 ```
 
 * Rosbag
