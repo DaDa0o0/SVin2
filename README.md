@@ -12,7 +12,7 @@ mkdir [your_catkin_worksapce]/src -p
 cd [your_catkin_worksapce]/src
 git clone https://github.com/DaDa0o0/SVin2.git
 ```
-**Replace [your_catkin_worksapce] with the own absolute path of your catkin workspace. (Example: /home/user/catkin_ws)**
+**Replace [your_catkin_worksapce] with the absolute path of your catkin workspace. (Example: /home/user/catkin_ws)**
 * Build Docker Image
 
 ```bash
