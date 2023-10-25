@@ -121,7 +121,7 @@ RUN source /opt/ros/noetic/setup.bash && catkin_make
 
 #CMD [ "bash" ]
 
-COPY ./docker/run_svin.sh /run_svin.sh
+COPY ./run_svin.sh /run_svin.sh
 ENTRYPOINT [ "bash","/run_svin.sh" ]
 # ENTRYPOINT [ "bash" ]
 # CMD [  ]
