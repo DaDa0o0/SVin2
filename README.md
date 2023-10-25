@@ -1,93 +1,34 @@
-SVIn2 is a tightly coupled Sonar-Visual-Inertial-Depth formulation of Simultaneous Localization and Mapping (SLAM) algorithm for real-time Underwater navigation. The package contains two modules:
+An updated version of SVin2(https://github.com/AutonomousFieldRoboticsLab/SVIn) with opengv lib error fixed and crash issue fixed, and easier docker isntallation.
 
-1. okvis_ros: Adaption of OKVIS (<https://github.com/ethz-asl/okvis_ros>) to fuse Sonar and Depth information in the tightly coupled formulation.
-2. pose_graph:  Loop-closing module to enable real-time loop detection and pose-graph optimization based on the bag-of-binary-words library DBoW2.
+### Docker Installation ###
+* Docker Engine Installation(if you haven't install Docker Engine)
+```bash
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+ ```
+* Clone
+```bash
+mkdir [your_catkin_worksapce]/src -p
+cd [your_catkin_worksapce]/src
+git clone https://github.com/DaDa0o0/SVin2.git
+```
+**Replace [your_catkin_worksapce] with the own absolute path of your catkin workspace. (Example: /home/user/catkin_ws)**
+* Build Docker Image
 
-### How do I get set up? ###
+```bash
+cd [your_catkin_worksapce]/src/SVIn/docker
+docker build -t svin_run -f ./run_svin.Dockerfile --network host .
+``` 
 
-This is a catkin package that wraps the pure CMake project.
-You will need to install the following dependencies,
+* Run Dcoker Container
 
-* CMake,
+```bash
+docker run -it --name svin_test -v [your_catkin_worksapce]/src:/home/svin_ws/src --rm --net host svin_run
+```
+* Run Dcoker Container
 
-        sudo apt install cmake
+Rviz can run out of the docker for visualization.
 
-* ROS (currently tested in: melodic and noetic). Read the instructions to install [ROS Noetic](http://wiki.ros.org/noetic/Installation/Ubuntu). You will need the additional package pcl-ros and tf2-sensor-msgs.
-
-        sudo apt install ros-noetic-pcl-ros
-        sudo apt install ros-noetic-tf2-sensor-msgs
-
-* google-glog + gflags, BLAS & LAPACK, Eigen3
-
-        sudo apt install libgoogle-glog-dev libatlas-base-dev libeigen3-dev
-
-* SuiteSparse, CXSparse, OpenCV and Boost
-
-        sudo apt install libsuitesparse-dev libopencv-dev
-        sudo apt install libboost-dev libboost-filesystem-dev
-
-* ceres-solver
-
-        git clone https://github.com/ceres-solver/ceres-solver.git
-        cd ceres-solver
-        git checkout 1.14.x
-        mkdir build
-        cd build
-        cmake -DCMAKE_BUILD_TYPE=Release ..
-        make -j8
-        sudo make install
-        cd ../..
-
-* brisk
-
-        wget https://www.doc.ic.ac.uk/~sleutene/software/brisk-2.0.8.zip
-        unzip brisk-2.0.8.zip
-        cd brisk
-        mkdir build
-        cd build
-        cmake -DCMAKE_BUILD_TYPE=Release ..
-        make -j8
-        sudo make install
-        cd ../..
-
-### Building the project ###
-
-* Create ros workspace. Download SVIn and sonar driver. Then build catkin project:
-
-        mkdir -p ~/svin_ws/src
-        cd ~/svin_ws/src
-        git clone --branch v0.1 https://github.com/AutonomousFieldRoboticsLab/SVIn.git
-        git clone https://github.com/AutonomousFieldRoboticsLab/imagenex831l.git
-        
-        # For Ubuntu 18.04/20.04 (ROS Noetic)
-        git clone --branch ros-noetic git@github.com:AutonomousFieldRoboticsLab/sonar_rviz_plugin.git
-        
-        #For Ubuntu 16.04
-        git clone git@github.com:AutonomousFieldRoboticsLab/sonar_rviz_plugin.git
-        
-        cd ..
-        catkin_make
-
-### Running the project ###
-
-Running it on our publicly available datasets: <https://afrl.cse.sc.edu/afrl/resources/datasets/>. If you follow "Datasets for Visual-Inertial-Based State Estimation Algorithms" link you will be directed to a google drive directory,  under the 'Bus' and 'Cave' you will find ROS bagfile with Sonar topic named as '/imagenex831l/range' and  '/imagenex831l/range_raw'.
-
-Run the launch file for Cave:
-
-        source ~/svin_ws/devel/setup.bash
-        roslaunch okvis_ros svin_stereorig_v2.launch
-
-Or, run the launch file for Bus:
-
-        source ~/svin_ws/devel/setup.bash
-        roslaunch okvis_ros svin_stereorig_v1.launch
-
-In different terminal, run the bag file
-
-        rosbag play bagfile_name --clock -r 0.8
-
-
-### Ground Truth ###
-The pseudo ground truth trajectories obtained using COLMAP are in colmap_groundtruth folder. These trajectories are only accurate up to scale and evaluation should be done after scaling only.
-
-Note: We plan to release the scale accurate trajectory using rig constraints soon.
+```bash
+rviz -d [your_catkin_worksapce]/src/SVIn/okvis_ros/config/rviz_svin.rviz
+```
