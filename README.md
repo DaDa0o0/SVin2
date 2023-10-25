@@ -1,4 +1,4 @@
-An updated version of SVin2(https://github.com/AutonomousFieldRoboticsLab/SVIn) with opengv lib error fixed and crash issue fixed, and easier docker isntallation.
+An updated version of SVin2(https://github.com/AutonomousFieldRoboticsLab/SVIn) with opengv lib error fixed and crash issue fixed, and easier docker installation.
 
 ### Docker Installation ###
 * Docker Engine Installation(if you haven't install Docker Engine)
