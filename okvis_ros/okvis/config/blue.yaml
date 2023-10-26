@@ -83,7 +83,7 @@ imageDelay: 0.0  # in case you are using a custom setup, you will have to calibr
 
 # display debug images?
 displayImages: false  # displays debug video and keyframe matches. May be slow.
-publishDebugImages: false  # publish debug image to topic ~debug_image_x
+publishDebugImages: true  # publish debug image to topic ~debug_image_x
 
 # use direct driver
 useDriver: false
